@@ -1,8 +1,11 @@
+
+
 import 'package:flutter/material.dart';
 
 class SuperScript extends StatefulWidget {
   final Widget parent;
-  const SuperScript({super.key, required this.parent});
+  final String text;
+  const SuperScript({super.key, required this.parent, required this.text});
 
   @override
   State<SuperScript> createState() => _SuperScriptState();
@@ -11,6 +14,28 @@ class SuperScript extends StatefulWidget {
 class _SuperScriptState extends State<SuperScript> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: Stack(children: [Container(decoration: BoxDecoration(color),), widget.parent],));
+    return SizedBox(
+      width: 30,
+      child: Stack(
+        children: [
+          widget.parent,
+          Align(
+            alignment: Alignment.topRight,
+            child: Container(
+              width: 11,
+              height: 8,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(4)),
+                color: Color(0xFF8B88EF),
+              ),
+              child: Center(
+                child: Text(widget.text,
+                    style: const TextStyle(color: Colors.black, fontSize: 6)),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
