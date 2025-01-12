@@ -1,3 +1,10 @@
+// I generally like to divide ui files based on the funnnel they are related to
+// like this is for the home page which is only one page, so the home folder
+// is only dedicated this page but generally there are more than one files in
+// a module which can be kept together for easier access. All the files related 
+// to state management be it BLoC or RiverPod are also stored along with the ui 
+// files in the same folder.
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

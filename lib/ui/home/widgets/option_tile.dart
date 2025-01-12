@@ -1,3 +1,6 @@
+// This is how I declare local widgets local to a single screen or a feature funnel.
+
+
 import 'package:flutter/material.dart';
 
 class OptionTile extends StatefulWidget {

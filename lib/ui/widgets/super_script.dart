@@ -1,4 +1,4 @@
-
+// This is how I declare global widgets, used accross differnet UI funnels.
 
 import 'package:flutter/material.dart';
 

@@ -1,0 +1,1 @@
+// All configuration constants like base urls and stuff are stored here.
