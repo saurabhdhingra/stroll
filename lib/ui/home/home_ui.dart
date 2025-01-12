@@ -1,8 +1,8 @@
 // I generally like to divide ui files based on the funnnel they are related to
 // like this is for the home page which is only one page, so the home folder
 // is only dedicated this page but generally there are more than one files in
-// a module which can be kept together for easier access. All the files related 
-// to state management be it BLoC or RiverPod are also stored along with the ui 
+// a module which can be kept together for easier access. All the files related
+// to state management be it BLoC or RiverPod are also stored along with the ui
 // files in the same folder.
 
 import 'package:flutter/cupertino.dart';
@@ -12,6 +12,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stroll/ui/home/widgets/option_tile.dart';
 import 'package:stroll/ui/widgets/super_script.dart';
+import 'package:stroll/utils/constants.dart';
+
+import '../../utils/ui_utils.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -38,6 +41,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var height = SizeConfig.getHeight(context);
+    var width = SizeConfig.getWidth(context);
+
     return Scaffold(
       body: Stack(
         children: [
@@ -46,10 +52,12 @@ class _HomePageState extends State<HomePage> {
           Positioned.fill(
             child: Column(
               children: [
-                const SizedBox(height: 60),
+                // This is usually how I place gaps, assign dimensions to
+                // widgets using the overall height and width of the device screen.
+                SizedBox(height: height * 0.07),
                 _title(),
                 _metrics(),
-                const SizedBox(height: 300),
+                SizedBox(height: height * 0.36),
                 _imageAndQuestion(),
                 _underQuote(),
                 _optionsGrid(),
@@ -96,7 +104,7 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Stroll Bonfire",
+          homeTitle,
           style: TextStyle(
             fontSize: 34,
             fontFamily: 'Proxima_Nova',
@@ -119,21 +127,21 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
-          'assets/clock.png',
+          clockAsset,
           height: 16,
         ),
         const SizedBox(width: 6),
         const Text(
-          "22h 00m",
+          hoursMetric,
           style: TextStyle(color: Colors.white, fontSize: 12),
         ),
         SvgPicture.asset(
-          'assets/User.svg',
+          userIcon,
           height: 22,
           colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
         ),
         const Text(
-          "103",
+          peopleMetric,
           style: TextStyle(color: Colors.white, fontSize: 12),
         ),
       ],
@@ -149,14 +157,14 @@ class _HomePageState extends State<HomePage> {
           children: [
             CircleAvatar(
               radius: 30,
-              backgroundImage: AssetImage('assets/Pic.jpg'),
+              backgroundImage: AssetImage(picAsset),
             ),
             SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Saurabh Dhingra, 22",
+                  nameAndAge,
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.white,
@@ -169,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                   child: Padding(
                     padding: EdgeInsets.only(left: 8.0),
                     child: Text(
-                      "Why you should hire me at Stroll ?",
+                      questionString,
                       style: TextStyle(
                         fontSize: 18,
                         fontFamily: 'Proxima_Nova',
@@ -189,7 +197,7 @@ class _HomePageState extends State<HomePage> {
 
   Text _underQuote() {
     return Text(
-      "\" Actually I should be asking when you are hiring me. \"",
+      underQuoteString,
       style: GoogleFonts.montserrat(
         fontSize: 12,
         color: Colors.white,
@@ -236,21 +244,25 @@ class _HomePageState extends State<HomePage> {
       showUnselectedLabels: false,
       items: [
         BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/Card.svg'), label: 'Explore'),
+          icon: SvgPicture.asset(exploreIcon),
+          label: 'Explore',
+        ),
         BottomNavigationBarItem(
             icon: SuperScript(
-              parent: SvgPicture.asset('assets/likes.svg'),
+              parent: SvgPicture.asset(likesIcon),
               text: '',
             ),
             label: 'Likes'),
         BottomNavigationBarItem(
             icon: SuperScript(
-              parent: SvgPicture.asset('assets/messages.svg'),
+              parent: SvgPicture.asset(messagesIcon),
               text: '10',
             ),
             label: 'Messages'),
         BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/User.svg'), label: 'Profile'),
+          icon: SvgPicture.asset(userIcon),
+          label: 'Profile',
+        ),
       ],
       selectedItemColor: Colors.blue,
       unselectedItemColor: Colors.grey,
